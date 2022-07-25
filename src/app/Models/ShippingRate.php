@@ -34,9 +34,24 @@ class ShippingRate extends Model
      * 
      * @return void
      */
+    public function setFromPostcodeAttribute(float|string $value): void
+    {
+        $this->attributes['from_postcode'] = str_replace(['.', ',', '-', ' '], '', $value);
+    }
+
+    public function setToPostcodeAttribute(float|string $value): void
+    {
+        $this->attributes['to_postcode'] = str_replace(['.', ','], '', $value);
+    }
+
     public function setFromWeightAttribute(float|string $value): void
     {
         $this->attributes['from_weight'] = Rate::convertStrToFloat($value);
+    }
+
+    public function setToWeightAttribute(float|string $value): void
+    {
+        $this->attributes['to_weight'] = Rate::convertStrToFloat($value);
     }
 
     /**
@@ -46,9 +61,9 @@ class ShippingRate extends Model
      * 
      * @return void
      */
-    public function setToWeightAttribute(float|string $value): void
+    public function setCostAttribute(float|string $value): void
     {
-        $this->attributes['to_weight'] = Rate::convertStrToFloat($value);
+        $this->attributes['cost'] = Rate::convertStrToFloat($value);
     }
 
     public function user()

@@ -39,4 +39,18 @@ RUN echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
 
 CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
 
+ENV client_max_body_size=2M \
+    clear_env=no \
+    allow_url_fopen=On \
+    allow_url_include=Off \
+    display_errors=Off \
+    file_uploads=On \
+    max_execution_time=0 \
+    max_input_time=-1 \
+    max_input_vars=1000 \
+    memory_limit=128M \
+    post_max_size=8M \
+    upload_max_filesize=64M \
+    zlib.output_compression=On
+
 EXPOSE 9000

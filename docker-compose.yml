@@ -12,6 +12,7 @@ services:
     restart: always
     volumes:
       - ./src:/var/www/html:delegated
+      - ./docker/php/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
     depends_on:
       - mysql
     networks:
