@@ -8,6 +8,10 @@ use App\Repositories\AuthRepository;
 use App\Services\Contracts\AuthServiceContract;
 use App\Services\OAuth\MailAuthService;
 
+/**
+ * Classe de serviço utilizada para abstrair do controller a responsabilidade de realizar chamadas para
+ * métodos do repositório e tratar regras de negócio da autenticação.
+ */
 class AuthService implements AuthServiceContract
 {
     public function __construct(private AuthRepository $repository)
@@ -25,9 +29,17 @@ class AuthService implements AuthServiceContract
         return $user;
     }
 
+    /**
+     * Insere o registro de um novo usuário.
+     * 
+     * @param array $data
+     * @param string $provider
+     * 
+     * @return User
+     */
     public function register(array $data, string $provider): User
     {
-       $userExists = $this->findUser($data['email']);
+       $userExists = $this->checkIfUserExists($data['email']);
 
         if ($userExists) {
             throw new UserHasBeenTakenException();
@@ -39,9 +51,15 @@ class AuthService implements AuthServiceContract
         return $this->repository->create($userData);
     }
 
-    private function findUser(string $email): bool
+    /**
+     * Verifica se existe determinado usuário já cadastrado no sistema.
+     * @param string $email
+     * 
+     * @return bool
+     */
+    private function checkIfUserExists(string $email): bool
     {
-        return $this->repository->findUser('email', $email);
+        return $this->repository->checkIfUserExists('email', $email);
     }
 
     private function getService(string $provider)

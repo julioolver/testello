@@ -8,6 +8,11 @@ use App\Services\AuthService;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * Controller responsável por realizar as chamadas das operações sobre a autenticação.
+ *
+ * @author Julio Cesar
+ */
 class AuthController extends Controller
 {
     public function __construct(AuthService $service)
@@ -17,7 +22,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Store a new user.
+     * Insere o registro de um novo usuário.
      *
      * @param  Request  $request
      * @return Response
