@@ -2,7 +2,7 @@
 
 namespace App\Services\Contracts;
 
-interface OAuthContract
+interface OAuthServiceContract
 {
     public function auth(array $data): array;
 

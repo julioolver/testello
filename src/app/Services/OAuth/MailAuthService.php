@@ -3,7 +3,7 @@
 namespace App\Services\OAuth;
 
 use App\Exceptions\LoginInvalidException;
-use App\Services\Contracts\OAuthContract;
+use App\Services\Contracts\OAuthServiceContract;
 use Illuminate\Support\Str;
 
 /**
@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
  * @package auth
  * @author Julio Cesar
  */
-class MailAuthService implements OAuthContract
+class MailAuthService implements OAuthServiceContract
 {
     /**
      * Realiza o login no sistema, onde retorna o token do usuário logado.
