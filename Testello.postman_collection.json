@@ -1,0 +1,298 @@
+{
+	"info": {
+		"_postman_id": "4523c7d9-1d90-42c4-bb51-439cad51861b",
+		"name": "Testello",
+		"description": "Teste Uello importação CSV de taxas de envio.\n\nPara realizar requisições no sistema, se torna necessário atualizar o Bearer Token no diretório pai do projeto (Testello), utilizando a rota Auth\\\\login, detalhada neste documento com um exemplo de body.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10258451"
+	},
+	"item": [
+		{
+			"name": "Shipping",
+			"item": [
+				{
+					"name": "Rate",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"from_postcode\": \"01400000\",\n    \"to_postcode\": \"01499999\",\n    \"from_weight\": 0.00,\n    \"to_weight\": \"0,26\",\n    \"cost\": 5.20,\n    \"user_id\": 1\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/shipping/rate",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"shipping",
+										"rate"
+									]
+								},
+								"description": "Registra uma nova taxa de envio."
+							},
+							"response": []
+						},
+						{
+							"name": "Import",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "import_file",
+											"type": "file",
+											"src": "/home/juliocesar/Downloads/price-table (1).csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:80/api/shipping/rate/import",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "80",
+									"path": [
+										"api",
+										"shipping",
+										"rate",
+										"import"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								},
+								"description": "Importa um arquivo CSV para registrar no sistema as taxas de envio em lote."
+							},
+							"response": []
+						},
+						{
+							"name": "Show",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost/api/shipping/rate/1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"api",
+										"shipping",
+										"rate",
+										"1"
+									]
+								},
+								"description": "Realiza o filtro por ID"
+							},
+							"response": []
+						}
+					],
+					"description": "Realiza a manutenção sobre os envios de frete (preços)."
+				}
+			],
+			"description": "Rota de envios"
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjU4NDEyOTU1LCJleHAiOjE2NTg0OTkzNTUsIm5iZiI6MTY1ODQxMjk1NSwianRpIjoiR2c2bWFNWlVhZmZGTlNsUCIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TNHKoMD2S1jHC9aXDL59ty6i1OJLEw4LAvEun8MUsb8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"julio\",\n    \"email\": \"test2@test.com\",\n    \"password\": \"123\",\n    \"password_confirmation\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Registra um novo Usuário no sistema."
+					},
+					"response": []
+				},
+				{
+					"name": "Me",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"julio\",\n    \"email\": \"test22@test.com\",\n    \"password\": \"123\",\n    \"password_confirmation\": \"123\",\n    \"type\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/auth/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"me"
+							]
+						},
+						"description": "Retorna os dados do usuário logado."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"admin@admin.com\",\n    \"password\": \"admin123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Realiza o Login no sistema."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9hdXRoL2xvZ2luIiwiaWF0IjoxNjU4ODc2NjI0LCJleHAiOjE2NTg4ODAyMjQsIm5iZiI6MTY1ODg3NjYyNCwianRpIjoicG1ER1FDQU53Q1hmYnlLTCIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.LrHXdmpZNP6KpzFWhxte7ybXevnvqsgzTkHZnGjfxxo",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
