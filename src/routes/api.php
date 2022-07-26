@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/import', [ShippingRateController::class, 'import'])->name('import');
 Route::group(['prefix' => 'auth', 'as' => 'auth.'], function () {
     Route::post('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/register', [AuthController::class, 'register'])->name('register');

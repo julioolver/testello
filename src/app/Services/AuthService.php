@@ -39,7 +39,7 @@ class AuthService implements AuthServiceContract
      */
     public function register(array $data, string $provider): User
     {
-       $userExists = $this->checkIfUserExists($data['email']);
+        $userExists = $this->checkIfUserExists($data['email']);
 
         if ($userExists) {
             throw new UserHasBeenTakenException();

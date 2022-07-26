@@ -23,10 +23,10 @@ class ShippingRateService extends BaseService implements ShippingRateServiceCont
     {
         $filePath = $this->localUpload($file);
 
-        ImportShippingRates::dispatch($filePath);
+        ImportShippingRates::dispatch($filePath, auth()->id());
     }
 
-    private function localUpload(object $file): string
+    private function localUpload(object $file)
     {
         $extension = $file->getClientOriginalExtension();
         $hash = md5(uniqid(rand(), true));

@@ -20,6 +20,12 @@ class ShippingRate extends Model
         'user_id'
     ];
 
+    protected $casts = [
+        'from_weight' => 'float',
+        'to_weight' => 'float',
+        'cost' => 'float'
+    ];
+
     // protected function fromWeight(): Attribute
     // {
     //     return Attribute::make(
