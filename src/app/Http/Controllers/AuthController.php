@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Http\Request;
-use App\Services\AuthService;
+use App\Services\Contracts\AuthServiceContract;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class AuthController extends Controller
 {
-    public function __construct(AuthService $service)
+    public function __construct(AuthServiceContract $service)
     {
         $this->service = $service;
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
@@ -41,7 +41,7 @@ class AuthController extends Controller
 
             return response()->json($user, Response::HTTP_CREATED);
         } catch (\Exception $e) {
-            return $this->responseError('Não foi possível cadastrar o usuário.', Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->responseError('Não foi possível cadastrar o usuário. ' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 

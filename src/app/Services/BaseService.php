@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Services;
 
 use App\Services\Contracts\BaseServiceContract;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Classe de serviço utilizada para abstrair do controller a responsabilidade de realizar chamadas para
@@ -37,5 +38,17 @@ class BaseService implements BaseServiceContract
     public function create(array $attributes): object
     {
         return $this->repository->create($attributes);
+    }
+
+    /**
+     * Realiza a busca de um registro por seu ID.
+     * 
+     * @param int $id
+     * 
+     * @return Model
+     */
+    public function findOne(int $id): Model
+    {
+        return $this->repository->findOne($id);
     }
 }
