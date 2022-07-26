@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Contracts;
 
-interface ShippingRateRepositoryContract
+interface ShippingRateRepositoryContract extends BaseRepositoryContract
 {
     
 }

@@ -3,7 +3,7 @@
 namespace App\Classes\Utils;
 
 /**
- * Classe para manipulação de dados do CEP
+ * Classe para manipulação de dados de campos com Mask
  * 
  * @package Utils
  * @author Julio Cesar

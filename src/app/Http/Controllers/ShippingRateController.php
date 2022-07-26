@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 
 
 /**
- * [Description ShippingRateController]
+ * Controller responsável por realizar as chamadas das operações sobre a Taxas de envio.
  * 
  * @package 
  */
@@ -22,18 +22,27 @@ class ShippingRateController extends Controller
         $this->service = $service;
     }
     /**
-     * Show the form for creating a new resource.
+     * Cria um novo registro
      *
-     * @return \Illuminate\Http\Response
+     * @return object
      */
-    public function create(Request $request)
+    public function create(Request $request): object
     {
-        $shippingRate = ShippingRate::create($request->all());
+        try {
+            $data = $request->all();
+            $shippingRate = $this->service->create($data);
 
-        return $shippingRate;
+            return $this->responseJson($shippingRate, Response::HTTP_OK);
+        } catch (\Exception $th) {
+            return $this->responseError($th, Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Error $er) {
+            return $this->responseError($er, Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 
     /**
+     * Realiza a importação CSV dos dados.
+     * 
      * @param Request $request
      * 
      * @return object
@@ -54,6 +63,8 @@ class ShippingRateController extends Controller
     }
 
     /**
+     * Retorna um registro através da busca realizada pelo seu ID
+     * 
      * @param Request $request
      * 
      * @return object

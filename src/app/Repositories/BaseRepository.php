@@ -8,9 +8,7 @@ use App\Repositories\Contracts\BaseRepositoryContract;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Repository responsável por realizar as operações sobre os alunos na camada de banco.
- *
- * Métodos implementados para listagem completa, listagem específica, criação, atualização, reativação e delete (lógico) de alunos.
+ * Repository responsável por realizar as operações na camada de banco.
  *
  * @package Bases
  * @author  Julio Cesar
@@ -46,6 +44,13 @@ class BaseRepository implements BaseRepositoryContract
         return $this->model->create($attributes);
     }
 
+    /**
+     * Realiza a busca de um registro através do seu ID.
+     * 
+     * @param int $id
+     * 
+     * @return Model
+     */
     public function findOne(int $id): Model
     {
         return $this->model->find($id);

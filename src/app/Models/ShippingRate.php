@@ -25,15 +25,7 @@ class ShippingRate extends Model
         'to_weight' => 'float',
         'cost' => 'float'
     ];
-
-    // protected function fromWeight(): Attribute
-    // {
-    //     return Attribute::make(
-    //         get: fn ($value) => str_replace('.', ',', $value),
-    //         set: fn ($value) => (float) str_replace(',', '.', $value)
-    //     );
-    // }
-
+    
     /**
      * Realiza a conversão de comma para dot antes de gravar no BD do field from_weight.
      * 

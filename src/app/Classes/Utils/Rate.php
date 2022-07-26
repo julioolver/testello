@@ -6,6 +6,8 @@ namespace App\Classes\Utils;
 
 /**
  * Classe para manipulação de dados dos Valores de frete
+ * 
+ * @package Utils
  * @author Julio Cesar <juliocesar.olver@gmail.com>
  */
 class Rate

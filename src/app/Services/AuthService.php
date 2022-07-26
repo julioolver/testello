@@ -14,6 +14,8 @@ use App\Services\OAuth\MailAuthService;
  */
 class AuthService implements AuthServiceContract
 {
+    const EMAIL = 'email';
+
     public function __construct(private AuthRepository $repository)
     {
     }
@@ -39,7 +41,7 @@ class AuthService implements AuthServiceContract
      */
     public function register(array $data, string $provider): User
     {
-        $userExists = $this->checkIfUserExists($data['email']);
+        $userExists = $this->checkIfUserExists($data[self::EMAIL]);
 
         if ($userExists) {
             throw new UserHasBeenTakenException();
@@ -59,13 +61,20 @@ class AuthService implements AuthServiceContract
      */
     private function checkIfUserExists(string $email): bool
     {
-        return $this->repository->checkIfUserExists('email', $email);
+        return $this->repository->checkIfUserExists(self::EMAIL, $email);
     }
 
-    private function getService(string $provider)
+    /**
+     * Retorna o tipo do serviço de autenticação a ser utilizado.
+     * 
+     * @param string $provider
+     * 
+     * @return object
+     */
+    private function getService(string $provider): object
     {
         return match ($provider) {
-            'email' => new MailAuthService()
+            self::EMAIL => new MailAuthService()
         };
     }
 }

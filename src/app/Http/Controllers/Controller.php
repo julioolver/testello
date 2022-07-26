@@ -71,6 +71,14 @@ class Controller extends BaseController
         return ($data->count() == 0);
     }
 
+    /**
+     * Obtém apenas os campos necessários para a entidade.
+     * 
+     * @param object $payload
+     * @param array $fields
+     * 
+     * @return array
+     */
     public function getOnlyFields(object $payload, array $fields): array
     {
         return $payload->only($fields);

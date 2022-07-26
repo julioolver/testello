@@ -40,6 +40,13 @@ class BaseService implements BaseServiceContract
         return $this->repository->create($attributes);
     }
 
+    /**
+     * Realiza a busca de um registro por seu ID.
+     * 
+     * @param int $id
+     * 
+     * @return Model
+     */
     public function findOne(int $id): Model
     {
         return $this->repository->findOne($id);
