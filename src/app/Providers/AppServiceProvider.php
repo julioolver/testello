@@ -24,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         foreach (self::ENTITIES as $key => $entity) {
             $this->app->bind("App\Services\Contracts\\{$entity}ServiceContract", "App\Services\\{$entity}Service");
+            $this->app->bind("App\Repositories\Contracts\\{$entity}RepositoryContract", "App\Repositories\\{$entity}Repository");
         }
 
         $this->app->bind("App\Services\Contracts\\". self::OAUTH ."ServiceContract", "App\Services\\". self::OAUTH ."\MailAuthService");
