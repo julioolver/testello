@@ -28,4 +28,9 @@ class Rate
 
         return (float) str_replace($search, $replace, $value);
     }
+
+    public static function removeMask(string $value): string
+    {
+        return Mask::removeMask($value);
+    }
 }

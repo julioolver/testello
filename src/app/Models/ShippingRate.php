@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Classes\Utils\Cep;
 use App\Classes\Utils\Rate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -34,28 +35,48 @@ class ShippingRate extends Model
      * 
      * @return void
      */
-    public function setFromPostcodeAttribute(float|string $value): void
+    public function setFromPostcodeAttribute(string $value): void
     {
-        $this->attributes['from_postcode'] = str_replace(['.', ',', '-', ' '], '', $value);
+        $this->attributes['from_postcode'] = Cep::removeMask($value);
     }
 
-    public function setToPostcodeAttribute(float|string $value): void
+    /**
+     * Remove a mácara do campo passado
+     * @param string $value
+     * 
+     * @return void
+     */
+    public function setToPostcodeAttribute(string $value): void
     {
-        $this->attributes['to_postcode'] = str_replace(['.', ','], '', $value);
+        $this->attributes['to_postcode'] = Cep::removeMask($value);
     }
 
+    /**
+     * Realiza a conversão de comma para dot antes de gravar no BD field from_weight.
+     * 
+     * @param float|string $value
+     * 
+     * @return void
+    */
     public function setFromWeightAttribute(float|string $value): void
     {
         $this->attributes['from_weight'] = Rate::convertStrToFloat($value);
     }
 
+    /**
+     * Realiza a conversão de comma para dot antes de gravar no BD field to_weight.
+     * 
+     * @param float|string $value
+     * 
+     * @return void
+    */
     public function setToWeightAttribute(float|string $value): void
     {
         $this->attributes['to_weight'] = Rate::convertStrToFloat($value);
     }
 
     /**
-     * Realiza a conversão de comma para dot antes de gravar no BD field to_weight.
+     * Realiza a conversão de comma para dot antes de gravar no BD field cost.
      * 
      * @param float|string $value
      * 
@@ -66,6 +87,10 @@ class ShippingRate extends Model
         $this->attributes['cost'] = Rate::convertStrToFloat($value);
     }
 
+    /**
+     * Relação de User com o Shipping Rate
+     * 
+     */
     public function user()
     {
         $this->belongsTo(User::class);
