@@ -9,9 +9,6 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    /**
-     * Variável padrão para os services das controllers
-     */
     protected $service;
 
     public function respondWithToken($token, $user = null)
@@ -47,6 +44,7 @@ class Controller extends BaseController
      *
      * @param  mixed $data Dados completo
      * @param  int $responseCode Código de resposta a ser enviado
+     * 
      * @return object
      */
     protected function responseJson($response, ?int $responseCode = null): object

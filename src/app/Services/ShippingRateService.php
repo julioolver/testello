@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Jobs\ImportShippingRates;
 use App\Repositories\Contracts\ShippingRateRepositoryContract;
-use App\Services\Contracts\ShippingRateContract;
+use App\Services\Contracts\ShippingRateServiceContract;
 
 /**
  * [Description ShippingRateService]
@@ -12,7 +12,7 @@ use App\Services\Contracts\ShippingRateContract;
  * @package ShippingRate
  * @author Julio Cesar
  */
-class ShippingRateService extends BaseService implements ShippingRateContract
+class ShippingRateService extends BaseService implements ShippingRateServiceContract
 {
     public function __construct(ShippingRateRepositoryContract $repository)
     {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Repositories;
 
 use App\Repositories\Contracts\BaseRepositoryContract;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Repository responsável por realizar as operações sobre os alunos na camada de banco.
@@ -43,5 +44,10 @@ class BaseRepository implements BaseRepositoryContract
     public function create(array $attributes): object
     {
         return $this->model->create($attributes);
+    }
+
+    public function findOne(int $id): Model
+    {
+        return $this->model->find($id);
     }
 }

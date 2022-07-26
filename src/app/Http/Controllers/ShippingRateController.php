@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ShippingRate\ImportRequest;
 use App\Models\ShippingRate;
-use App\Services\ShippingRateService;
+use App\Services\Contracts\ShippingRateServiceContract;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +18,7 @@ use Illuminate\Http\Response;
 class ShippingRateController extends Controller
 {
 
-    public function __construct(ShippingRateService $service) {
+    public function __construct(ShippingRateServiceContract $service) {
         $this->service = $service;
     }
     /**
@@ -60,9 +60,15 @@ class ShippingRateController extends Controller
      */
     public function show(Request $request): object
     {
-        $id = $request->route('id');
-        $shippingRate = ShippingRate::find($id);
+        try {
+            $id = $request->route('id');
+            $shippingRate = $this->service->findOne($id);
 
-        dd($shippingRate);
+            return $this->responseJson($shippingRate);
+        } catch (\Exception $th) {
+            return $this->responseError($th->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (\Error $er) {
+            return $this->responseError($er->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
     }
 }
