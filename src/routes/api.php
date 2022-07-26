@@ -30,7 +30,7 @@ Route::group(['middleware' => 'auth:api'], function () {
     Route::group(['middleware' => 'auth:api', 'prefix' => 'shipping', 'as' => 'shipping.'], function () {
         Route::group(['prefix' => 'rate', 'as' => 'rate.'], function () {
             Route::post('', [ShippingRateController::class, 'create'])->name('create');
-            Route::post('import', [ShippingRateController::class, 'create'])->name('import');
+            Route::post('import', [ShippingRateController::class, 'import'])->name('import');
             Route::get('{id}', [ShippingRateController::class, 'show'])->name('show');
         });
     });

@@ -23,7 +23,7 @@ class ShippingRatesImport extends BaseImport implements ToModel, WithChunkReadin
             'from_weight' => $row[2],
             'to_weight' => $row[3],
             'cost' => $row[4],
-            'user_id' => auth()->id()
+            'user_id' => auth()->id() ?? 1
         ]);
     }
 }

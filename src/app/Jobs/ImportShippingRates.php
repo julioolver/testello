@@ -2,25 +2,30 @@
 
 namespace App\Jobs;
 
+use App\Imports\ShippingRatesImport;
+use App\Services\ShippingRateService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportShippingRates implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    protected $filePath;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(string $filePath)
     {
-        //
+        $this->filePath = $filePath;
     }
 
     /**
@@ -30,6 +35,6 @@ class ImportShippingRates implements ShouldQueue
      */
     public function handle()
     {
-        //
+        Excel::import(app(ShippingRatesImport::class), $this->filePath);
     }
 }

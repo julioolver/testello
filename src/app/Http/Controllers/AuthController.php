@@ -41,7 +41,7 @@ class AuthController extends Controller
 
             return response()->json($user, Response::HTTP_CREATED);
         } catch (\Exception $e) {
-            return $this->responseError('Não foi possível cadastrar o usuário.', Response::HTTP_INTERNAL_SERVER_ERROR);
+            return $this->responseError('Não foi possível cadastrar o usuário.' . $e->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
