@@ -47,16 +47,17 @@ Executar o container PHP para trabalhar com o composer:
 ```
 docker exec -it testello-php /bin/bash
 ```
-Gerar a key do projeto dentro do container
-
-```
-php artisan key:generate
-```
 
 Instalar dependências do composer
 
 ```
 composer install
+```
+
+Gerar a key do projeto dentro do container
+
+```
+php artisan key:generate
 ```
 
 Rodar migrations e seeds (para criar o usuário Admin):
@@ -85,7 +86,7 @@ Para visualizar as rotas e requisições, segue o arqivo <b>Testello.postman_col
 
 - [MYSQL](https://www.mysql.com/) - Database
 - [Laravel 9.x](https://laravel.com/) - Server Framework
-- [PHP](https://php.net/) - Server Environment
+- [PHP 8.1](https://php.net/) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
 
